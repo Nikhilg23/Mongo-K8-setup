@@ -87,3 +87,37 @@ Stored securely in mongodb-secret.yaml using base64 encoding.
 ```bash
 echo -n 'your-value' | base64
 ```
+
+## ⚙️ Mongo Express Environment Variables
+
+These are used in mongo-express-deployment.yaml:
+```bash
+- name: ME_CONFIG_MONGODB_ADMINUSERNAME   # from Secret
+- name: ME_CONFIG_MONGODB_ADMINPASSWORD   # from Secret
+- name: ME_CONFIG_MONGODB_SERVER          # from ConfigMap
+```
+
+# 🧰 Helpful Commands
+
+```bash
+kubectl get pods
+kubectl get svc
+kubectl logs <pod-name>
+kubectl describe pod <pod-name>
+kubectl delete -f .
+minikube dashboard
+```
+
+## 🛠️ Troubleshooting
+
+| Problem                           | Solution                                                                                   |
+| --------------------------------- | ------------------------------------------------------------------------------------------ |
+| `AuthenticationFailed` error      | Check that Secrets match MongoDB config                                                    |
+| Mongo Express can't reach MongoDB | Ensure `ME_CONFIG_MONGODB_SERVER` matches MongoDB's service name                           |
+| Site won’t load                   | Run `minikube service mongo-express-service` and keep terminal open if using Docker driver |
+| Port conflict                     | Check `mongo-express-service.yaml` to avoid port overlap                                   |
+
+
+# 🙋 Author
+Nikhil Gupta
+GitHub: @Nikhilg23
